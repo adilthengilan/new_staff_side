@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
+import 'package:tuchtrip_staff_portal/view/Bottom%20Navigation%20Bar/bottom_navigation_bar.dart';
 import 'package:tuchtrip_staff_portal/view/Common%20Widget/app_textButton.dart';
 import 'package:tuchtrip_staff_portal/view/Common%20Widget/app_textfield.dart';
-import 'package:tuchtrip_staff_portal/view/Dashboard/dashboard.dart';
+import 'package:tuchtrip_staff_portal/view/Dashboard/bellboys_dashboard.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -15,8 +16,8 @@ class SignupScreen extends StatelessWidget {
     //-----------------------SignUp Page Text Field Controllers-------------------------------
     final TextEditingController firstNameController = TextEditingController();
     final TextEditingController lastNameController = TextEditingController();
-    final TextEditingController mobileNumberController =
-        TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController hotelnameController = TextEditingController();
 
     //---------------------Media Query is for assign with responsive size--------------
     final height = MediaQuery.of(context).size.height;
@@ -64,18 +65,21 @@ class SignupScreen extends StatelessWidget {
             ),
             sizedBox(height * 0.02, 0.0),
             AppTextField(
-              controller: mobileNumberController,
+              controller: emailController,
               hintText: "Email",
               height: height,
               width: width,
             ),
             sizedBox(height * 0.02, 0.0),
             AppTextField(
-              controller: mobileNumberController,
+              controller: hotelnameController,
               hintText: "Hotel Name",
               height: height,
               width: width,
             ),
+            //------------------------------------------------------------------------------------------------------------
+            //----------------------------------------- DEPARTMENT -------------------------------------------------------------------
+
             Padding(
               padding: EdgeInsets.only(
                   left: width * 0.05, top: height * 0.04, right: width * 0.03),
@@ -189,7 +193,7 @@ class SignupScreen extends StatelessWidget {
 
             //---------------------------------- Use Email Button ---------------------------------------------------------------------
             Padding(
-              padding: EdgeInsets.only(right: width * 0.09),
+              padding: EdgeInsets.only(right: width * 0.04),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -201,40 +205,43 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
             ),
-            sizedBox(height * 0.039, 0.0),
+
+            sizedBox(height * 0.065, 0.0),
             //------------------------------------ Text Button --------------------------------------------------------------------
             AppTextButton(
               text: "Sign Up",
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboard()));
+                    MaterialPageRoute(builder: (context) => CustomBottomNavigationBar(departmentIndex: 2,)));
               },
               height: height,
               width: width,
             ),
             sizedBox(height * 0.02, width),
-            Row(
-              children: [
-                SizedBox(width: width * 0.2),
-                Text(
-                  'Already have an account?',
-                  style: smallTextStyle,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    ' Login',
-                    style: smallblueTextStyle,
+            Padding(
+              padding: EdgeInsets.only(left: width * 0.16),
+              child: Row(
+                children: [
+                  Text(
+                    'Already have an account?',
+                    style: smallTextStyle,
                   ),
-                ),
-              ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      ' Login',
+                      style: smallblueTextStyle,
+                    ),
+                  ),
+                ],
+              ),
             ),
             sizedBox(height * 0.10, width),
           ],

@@ -11,42 +11,51 @@ class RoomManagementScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: blackShadeColor,
+    return SingleChildScrollView(
+      child: Column(children: [
+        Padding(
+          padding: EdgeInsets.only(
+              top: height * 0.04,
+              left: width * 0.02,
+              right: width * 0.02,
+              bottom: height * 0.02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(
+                Icons.arrow_back_ios_new,
+                color: blackShadeColor,
+              ),
+              Text(
+                "Room Status",
+                style: mediumTextstylebold,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: width * 0.02),
+                child: Icon(
+                  Icons.notifications_none_rounded,
+                  color: blackShadeColor,
+                ),
+              )
+            ],
+          ),
         ),
-        title: Text(
-          "Room Status",
-          style: mediumTextstylebold,
+        GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.all(10.0),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            childAspectRatio: 2 / 1,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: roomList.length,
+          itemBuilder: (context, index) {
+            return RoomCard(room: roomList[index]);
+          },
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: width * 0.02),
-            child: Icon(
-              Icons.notifications_none_rounded,
-              color: blackShadeColor,
-            ),
-          )
-        ],
-      ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(10.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1,
-          childAspectRatio: 2 / 1,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: roomList.length,
-        itemBuilder: (context, index) {
-          return RoomCard(room: roomList[index]);
-        },
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      ]),
     );
   }
 }
@@ -151,7 +160,7 @@ class RoomCard extends StatelessWidget {
         return Colors.green;
       case 'Occupied':
         return Colors.red;
-      case 'Cleaning':
+      case 'Washing':
         return Colors.orange;
       case 'Maintenance':
         return Colors.blue;
@@ -179,7 +188,7 @@ class Room {
 List<Room> roomList = [
   Room(number: 101, type: 'Single', status: 'Available', schedule: 'Cleaned'),
   Room(number: 102, type: 'Double', status: 'Occupied', schedule: 'Cleaned'),
-  Room(number: 103, type: 'Suite', status: 'Cleaning', schedule: 'Scheduled'),
+  Room(number: 103, type: 'Suite', status: 'Washing', schedule: 'Scheduled'),
   Room(number: 104, type: 'Double', status: 'Maintenance', schedule: 'Repair'),
   Room(number: 105, type: 'Single', status: 'Available', schedule: 'Cleaned'),
   Room(number: 106, type: 'Suite', status: 'Occupied', schedule: 'Cleaned'),

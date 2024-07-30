@@ -5,7 +5,7 @@ import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
 import 'package:tuchtrip_staff_portal/view/Bottom%20Navigation%20Bar/bottom_navigation_bar.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
 
-class RecentActivity extends StatelessWidget {
+class RoomManagementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -22,17 +22,12 @@ class RecentActivity extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: blackShadeColor,
-                ),
+              Icon(
+                Icons.arrow_back_ios_new,
+                color: blackShadeColor,
               ),
               Text(
-                "Recent Activity",
+                "Room Status",
                 style: mediumTextstylebold,
               ),
               Padding(
@@ -46,7 +41,8 @@ class RecentActivity extends StatelessWidget {
           ),
         ),
         GridView.builder(
-          shrinkWrap: true,physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(10.0),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
@@ -91,11 +87,7 @@ class RoomCard extends StatelessWidget {
           // Navigate to room details or update page
         },
         child: Padding(
-          padding: EdgeInsets.only(
-            left: width * 0.05,
-            top: height * 0.02,
-            right: width * 0.05,
-          ),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -108,21 +100,20 @@ class RoomCard extends StatelessWidget {
                     style: smallTextStyle,
                   ),
                   sizedBox(height * 0.02, width * 0.01),
+                  Text('Status: ${room.status}',
+                      style: GoogleFonts.montserrat(
+                          color: getStatusColor(room.status),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700)),
+                  sizedBox(height * 0.01, width * 0.01),
                   Text(
-                    room.status,
+                    room.schedule,
                     style: GoogleFonts.montserrat(
-                        fontSize: 16,
-                        color: getStatusColor(room.status),
+                        fontSize: 12,
+                        color: Colors.grey,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "9:00 am to 9:15",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  sizedBox(height * 0.01, width * 0.01),
+                  sizedBox(height * 0.02, width * 0.01),
                   GestureDetector(
                     onTap: () {
                       // Function to update room status
@@ -133,9 +124,9 @@ class RoomCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             gradient: LinearGradient(colors: [
-                              Color.fromARGB(255, 101, 212,
-                                  246), // Converted from #f6d365 (starting color)
-                              Color.fromARGB(255, 133, 247, 253),
+                              Color(
+                                  0xfff6d365), // Converted from #f6d365 (starting color)
+                              Color(0xfffda085),
                             ])),
                         child: Center(
                             child: Text(
@@ -151,7 +142,7 @@ class RoomCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          "assests/images/Room1.jpg",
+                          "assests/images/Room4.jpg",
                         ),
                         fit: BoxFit.fill),
                     borderRadius: BorderRadius.circular(10)),
@@ -165,13 +156,13 @@ class RoomCard extends StatelessWidget {
 
   Color getStatusColor(String status) {
     switch (status) {
-      case 'Cleaned':
+      case 'Available':
         return Colors.green;
       case 'Occupied':
         return Colors.red;
       case 'Cleaning':
         return Colors.orange;
-      case 'Scheduled':
+      case 'Maintenance':
         return Colors.blue;
       default:
         return Colors.grey;
@@ -183,25 +174,22 @@ class Room {
   final int number;
   final String type;
   final String status;
+  final String schedule;
 
   Room({
     required this.number,
     required this.type,
     required this.status,
+    required this.schedule,
   });
 }
 
 // Dummy data for rooms
 List<Room> roomList = [
-  Room(
-    number: 101,
-    type: 'Single',
-    status: 'Cleaned',
-  ),
-  Room(
-    number: 102,
-    type: 'Double',
-    status: 'Cleaning',
-  ),
-  Room(number: 103, type: 'Suite', status: 'Scheduled'),
+  Room(number: 101, type: 'Single', status: 'Available', schedule: ''),
+  Room(number: 102, type: 'Double', status: 'Occupied', schedule: 'Cleaned'),
+  Room(number: 103, type: 'Suite', status: 'Cleaning', schedule: 'Scheduled'),
+  Room(number: 104, type: 'Double', status: 'Maintenance', schedule: 'Repair'),
+  Room(number: 105, type: 'Single', status: 'Available', schedule: 'Cleaned'),
+  Room(number: 106, type: 'Suite', status: 'Occupied', schedule: 'Cleaned'),
 ];

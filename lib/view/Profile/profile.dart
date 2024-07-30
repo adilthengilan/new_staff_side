@@ -14,257 +14,253 @@ class ProfileScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(children: [
-          Container(
-            width: width,
-            padding: EdgeInsets.only(
-              top: height * 0.12,
-              bottom: height * 0.06,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(4, 4),
-                  blurRadius: 4,
-                  color: Color.fromARGB(255, 228, 228, 228),
-                ),
-                BoxShadow(
-                  offset: Offset(-3, 0),
-                  blurRadius: 4,
-                  color: Color.fromARGB(255, 216, 216, 216),
-                ),
-              ],
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 163, 238, 255),
-                Color.fromARGB(255, 252, 215, 249),
-              ]),
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(40),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(children: [
+        Container(
+          width: width,
+          padding: EdgeInsets.only(
+            top: height * 0.12,
+            bottom: height * 0.06,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(4, 4),
+                blurRadius: 4,
+                color: Color.fromARGB(255, 228, 228, 228),
               ),
-              // image: darktheme
-              //     ? DecorationImage(
-              //         image: AssetImage("assets/images/Profile_Bg_Image.png"),
-              //         fit: BoxFit.fill,
-              //       )
-              //     : DecorationImage(
-              //         image: AssetImage(
-              //             "assets/images/profile_background_lightTheme.png"),
-              //         fit: BoxFit.cover,
-              //       ),
+              BoxShadow(
+                offset: Offset(-3, 0),
+                blurRadius: 4,
+                color: Color.fromARGB(255, 216, 216, 216),
+              ),
+            ],
+            gradient: LinearGradient(colors: [
+              Color.fromARGB(255, 163, 238, 255),
+              Color.fromARGB(255, 252, 215, 249),
+            ]),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(40),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.046),
-              child: Column(
-                children: [
-                  Container(
-                    height: height * 0.11,
-                    width: width * 0.22,
-                    decoration: BoxDecoration(
-                      color: transparantColor,
-                      shape: BoxShape.circle,
-                      image:
-                          //  profileProvider.image != null
-                          //     ? DecorationImage(
-                          //         fit: BoxFit.cover,
-                          //         image: FileImage(profileProvider.image!),
-                          //       )
-                          // :
-                          DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          "assets/images/Profile_person_Icon.png",
-                        ),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: width * 0.125, top: 50),
-                      //================================================================ Image Picker Button ==================================================
-                      child: MaterialButton(
-                        onPressed: () {
-                          // =========================================================== Image Picker From Device Gallery [Function] ===========================
-                          // profileProvider.openImagePicker();
-                        },
-                        color: Colors.blue,
-                        child: Center(
-                          child: Icon(
-                            Icons.photo_camera,
-                            color: backgroundColor,
-                            size: 14,
-                          ),
-                          //  AppIcon(
-                          //   iconData: Icons.photo_camera,
-                          //   color: Colors.white,
-                          //   height: height * 0.02,
-                          // ),
-                        ),
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(2),
+            // image: darktheme
+            //     ? DecorationImage(
+            //         image: AssetImage("assets/images/Profile_Bg_Image.png"),
+            //         fit: BoxFit.fill,
+            //       )
+            //     : DecorationImage(
+            //         image: AssetImage(
+            //             "assets/images/profile_background_lightTheme.png"),
+            //         fit: BoxFit.cover,
+            //       ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.046),
+            child: Column(
+              children: [
+                Container(
+                  height: height * 0.11,
+                  width: width * 0.22,
+                  decoration: BoxDecoration(
+                    color: transparantColor,
+                    shape: BoxShape.circle,
+                    image:
+                        //  profileProvider.image != null
+                        //     ? DecorationImage(
+                        //         fit: BoxFit.cover,
+                        //         image: FileImage(profileProvider.image!),
+                        //       )
+                        // :
+                        DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        "assets/images/Profile_person_Icon.png",
                       ),
                     ),
                   ),
-                  sizedBox(height * 0.03, 0.0),
-                  //===================================================================== User Name ===========================================
-                  Text("John Smith", style: mediumTextstylebold),
-                  Text("(Employee id)", style: smallTextStyle),
-                  sizedBox(height * 0.061, 0.0),
-
-                  Container(
-                    height: height * 0.16,
-                    width: width * 0.800,
-                    margin: EdgeInsets.symmetric(horizontal: width * 0.04),
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(4, 4),
-                          blurRadius: 4,
-                          color: Color.fromARGB(45, 158, 158, 158),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: width * 0.125, top: 50),
+                    //================================================================ Image Picker Button ==================================================
+                    child: MaterialButton(
+                      onPressed: () {
+                        // =========================================================== Image Picker From Device Gallery [Function] ===========================
+                        // profileProvider.openImagePicker();
+                      },
+                      color: Colors.blue,
+                      child: Center(
+                        child: Icon(
+                          Icons.photo_camera,
+                          color: backgroundColor,
+                          size: 14,
                         ),
-                        BoxShadow(
-                          offset: Offset(-2, 0),
-                          blurRadius: 4,
-                          color: Color.fromARGB(255, 216, 216, 216),
+                        //  AppIcon(
+                        //   iconData: Icons.photo_camera,
+                        //   color: Colors.white,
+                        //   height: height * 0.02,
+                        // ),
+                      ),
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(2),
+                    ),
+                  ),
+                ),
+                sizedBox(height * 0.03, 0.0),
+                //===================================================================== User Name ===========================================
+                Text("John Smith", style: mediumTextstylebold),
+                Text("(Employee id)", style: smallTextStyle),
+                sizedBox(height * 0.061, 0.0),
+
+                Container(
+                  height: height * 0.16,
+                  width: width * 0.800,
+                  margin: EdgeInsets.symmetric(horizontal: width * 0.04),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(4, 4),
+                        blurRadius: 4,
+                        color: Color.fromARGB(45, 158, 158, 158),
+                      ),
+                      BoxShadow(
+                        offset: Offset(-2, 0),
+                        blurRadius: 4,
+                        color: Color.fromARGB(255, 216, 216, 216),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: height * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Position",
+                              style: smallgreyTextStyle,
+                            ),
+                            Text(
+                              "Department",
+                              style: smallgreyTextStyle,
+                            ),
+                            Text(
+                              "Shift",
+                              style: smallgreyTextStyle,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Chef",
+                              style: smallTextStylebold,
+                            ),
+                            // sizedBox(height * 0.01, width * 0.01),
+                            Text(
+                              "Kitchen",
+                              style: smallTextStyle,
+                            ),
+                            // sizedBox(height * 0.01, width * 0.01),
+                            Text(
+                              "9:00 am - 5:00",
+                              style: smallTextStyle,
+                            )
+                          ],
                         ),
                       ],
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: height * 0.03),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Position",
-                                style: smallgreyTextStyle,
-                              ),
-                              Text(
-                                "Department",
-                                style: smallgreyTextStyle,
-                              ),
-                              Text(
-                                "Shift",
-                                style: smallgreyTextStyle,
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Chef",
-                                style: smallTextStylebold,
-                              ),
-                              // sizedBox(height * 0.01, width * 0.01),
-                              Text(
-                                "Kitchen",
-                                style: smallTextStyle,
-                              ),
-                              // sizedBox(height * 0.01, width * 0.01),
-                              Text(
-                                "9:00 am - 5:00",
-                                style: smallTextStyle,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          sizedBox(height * 0.04, 0.0),
-          Container(
-            width: width * 0.900,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(2, 1),
-                  blurRadius: 2,
-                  color: Color.fromARGB(222, 228, 228, 228),
-                ),
-                BoxShadow(
-                  offset: Offset(-2, 0),
-                  blurRadius: 2,
-                  color: Color.fromARGB(255, 216, 216, 216),
                 ),
               ],
             ),
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: width * 0.03,
-                  top: height * 0.02,
-                  bottom: height * 0.02,
-                  right: width * 0.03),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Contact Info",
-                        style: mediumTextstylebold,
-                      ),
-                      Text(
-                        "Edit",
-                        style: smallblueTextStyle,
-                      )
-                    ],
-                  ),
-                  sizedBox(height * 0.02, width * 0.01),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.phone_android_outlined,
-                        color: greyShadeLight,
-                        size: 18,
-                      ),
-                      sizedBox(height * 0.01, width * 0.01),
-                      Text(
-                        "9034567824",
-                        style: smallTextStyle,
-                      ),
-                    ],
-                  ),
-                  sizedBox(height * 0.01, 0.0),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.mail_outline,
-                        color: greyShadeLight,
-                        size: 18,
-                      ),
-                      sizedBox(height * 0.01, width * 0.01),
-                      Text(
-                        "Infoalexabraham@gmail.com",
-                        style: smallTextStyle,
-                      )
-                    ],
-                  ),
-                  sizedBox(height * 0.02, width),
-                ],
+          ),
+        ),
+        sizedBox(height * 0.04, 0.0),
+        Container(
+          width: width * 0.900,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(2, 1),
+                blurRadius: 2,
+                color: Color.fromARGB(222, 228, 228, 228),
               ),
+              BoxShadow(
+                offset: Offset(-2, 0),
+                blurRadius: 2,
+                color: Color.fromARGB(255, 216, 216, 216),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: width * 0.03,
+                top: height * 0.02,
+                bottom: height * 0.02,
+                right: width * 0.03),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Contact Info",
+                      style: mediumTextstylebold,
+                    ),
+                    Text(
+                      "Edit",
+                      style: smallblueTextStyle,
+                    )
+                  ],
+                ),
+                sizedBox(height * 0.02, width * 0.01),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.phone_android_outlined,
+                      color: greyShadeLight,
+                      size: 18,
+                    ),
+                    sizedBox(height * 0.01, width * 0.01),
+                    Text(
+                      "9034567824",
+                      style: smallTextStyle,
+                    ),
+                  ],
+                ),
+                sizedBox(height * 0.01, 0.0),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.mail_outline,
+                      color: greyShadeLight,
+                      size: 18,
+                    ),
+                    sizedBox(height * 0.01, width * 0.01),
+                    Text(
+                      "Infoalexabraham@gmail.com",
+                      style: smallTextStyle,
+                    )
+                  ],
+                ),
+                sizedBox(height * 0.02, width),
+              ],
             ),
           ),
-          sizedBox(height * 0.03, width),
-          _buildProfileButtonsGridType(height, width),
-          sizedBox(height * 0.05, width),
-        ]),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+        ),
+        sizedBox(height * 0.03, width),
+        _buildProfileButtonsGridType(height, width),
+        sizedBox(height * 0.05, width),
+      ]),
     );
   }
 
