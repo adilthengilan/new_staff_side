@@ -1,6 +1,5 @@
 // Mock Authentication State Class
 import 'package:flutter/material.dart';
-import 'package:tuchtrip_staff_portal/model/staff_model.dart';
 
 class LoginProvider with ChangeNotifier {
 //------------------------------------------------------ current staff -----------------------------------------------------------

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tuchtrip_staff_portal/model/staff_model.dart';
 import 'package:tuchtrip_staff_portal/utils/app_colors.dart';
 import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
 import 'package:tuchtrip_staff_portal/view%20model/login_provider.dart';
@@ -13,12 +12,15 @@ import 'package:tuchtrip_staff_portal/view/Registration/signUp_screen.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
+  // Controllers for text fields
   final TextEditingController hotelNameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
 
+  // List of available departments
   final List<String> departments = ['Bellboys', 'Laundry', 'Restaurant'];
-
+  //***************************************************************************************************************************** */
+  // Function to handle login
   void _login(BuildContext context) {
     String hotelName = hotelNameController.text.trim();
     String userName = userNameController.text.trim();
@@ -27,9 +29,11 @@ class LoginScreen extends StatelessWidget {
     if (hotelName.isNotEmpty && userName.isNotEmpty && department.isNotEmpty) {
       int departmentIndex = _getDepartmentIndex(department);
 
+      // Log in using the LoginProvider
       Provider.of<LoginProvider>(context, listen: false)
           .logIn(hotelName, userName, department);
 
+      // Navigate to the appropriate dashboard based on department
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -38,12 +42,15 @@ class LoginScreen extends StatelessWidget {
         ),
       );
     } else {
+      // Show error message if any field is empty
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please fill all the fields')),
       );
     }
   }
+  //***************************************************************************************************************************** */
 
+  // Helper function to get department index based on department name
   int _getDepartmentIndex(String department) {
     switch (department.toLowerCase()) {
       case 'bellboys':
@@ -68,7 +75,8 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            sizedBox(height * 0.3, width),
+            sizedBox(height * 0.17, width),
+            // Welcome text
             Text(
               'Welcome Back!',
               style: GoogleFonts.montserrat(
@@ -77,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
+            // Subtitle text
             Text(
               'Sign in to continue!',
               style: GoogleFonts.montserrat(
@@ -86,6 +95,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             sizedBox(height * 0.06, width),
+            // Hotel Name input field
             AppTextField(
               controller: hotelNameController,
               hintText: "Hotel Name",
@@ -93,6 +103,7 @@ class LoginScreen extends StatelessWidget {
               width: width,
             ),
             sizedBox(height * 0.02, width),
+            // User Name input field
             AppTextField(
               controller: userNameController,
               hintText: "User Name",
@@ -100,19 +111,25 @@ class LoginScreen extends StatelessWidget {
               width: width,
             ),
             sizedBox(height * 0.02, width),
-            Padding(
-              padding: EdgeInsets.only(left: width * 0.06, right: width * 0.06),
+            // Department dropdown field
+            Container(
+              height: 60,
+              margin: EdgeInsets.symmetric(horizontal: width * 0.06),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 206, 206, 206),
+                ),
+              ),
               child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
+                  border: InputBorder.none,
                   hintText: 'Select Department',
                   hintStyle: GoogleFonts.montserrat(
                       fontSize: 17,
                       color: greyShadeLight,
                       fontWeight: FontWeight.w600),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  contentPadding: EdgeInsets.only(left: 20, top: 10),
                 ),
                 value: departments.contains(departmentController.text)
                     ? departmentController.text
@@ -131,6 +148,7 @@ class LoginScreen extends StatelessWidget {
                 }).toList(),
               ),
             ),
+            // Use Email button
             Padding(
               padding: EdgeInsets.only(right: width * 0.04),
               child: Align(
@@ -151,32 +169,32 @@ class LoginScreen extends StatelessWidget {
               height: height,
               width: width,
             ),
-            sizedBox(height * 0.02, width),
-            Padding(
-              padding: EdgeInsets.only(left: width * 0.16),
-              child: Row(
-                children: [
-                  Text(
-                    'Don\'t have an account?',
-                    style: smallTextStyle,
+            sizedBox(height * 0.04, width),
+            // Sign Up prompt
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Don\'t have an account?',
+                  style: smallTextStyle,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignupScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    ' Sign Up',
+                    style: smallblueTextStyle,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      ' Sign Up',
-                      style: smallblueTextStyle,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
+            sizedBox(height * 0.10, width),
           ],
         ),
       ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuchtrip_staff_portal/utils/app_colors.dart';
 import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
-import 'package:tuchtrip_staff_portal/view/Bottom%20Navigation%20Bar/bottom_navigation_bar.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
 
 class RecentActivity extends StatelessWidget {

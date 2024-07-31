@@ -18,13 +18,14 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+    // Index to keep track of the selected page
   int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
 
-    // Customize pages and icons based on department index
+  // Retrieve the list of pages and icons based on the department index
     final List<Widget> pages = _getPagesForDepartment(widget.departmentIndex);
     final List<IconData> icons = _getIconsForDepartment(widget.departmentIndex);
     final List<IconData> selectedIcons =
@@ -68,6 +69,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 
+  // Function to get pages based on the department index --------------------------------------------------------------------------
   List<Widget> _getPagesForDepartment(int departmentIndex) {
     switch (departmentIndex) {
       case 0: // Bellboys
@@ -96,6 +98,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     }
   }
 
+  // Function to get unselected icons based on the department index --------------------------------------------------------------------------
   List<IconData> _getIconsForDepartment(int departmentIndex) {
     switch (departmentIndex) {
       case 0:
@@ -107,21 +110,21 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         ];
       case 1:
         return [
-          Icons.home,
+          Icons.home_outlined,
           Icons.local_laundry_service_outlined,
           Icons.domain_verification,
           Icons.person_outline
         ];
       case 2:
         return [
-          Icons.home,
+          Icons.home_outlined,
           Icons.restaurant_menu_outlined,
           Icons.recent_actors_outlined,
           Icons.person_outline
         ];
       default:
         return [
-          Icons.home,
+          Icons.home_outlined,
           Icons.work_outline_outlined,
           Icons.widgets_outlined,
           Icons.person_outline
@@ -129,6 +132,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     }
   }
 
+  // Function to get selected icons based on the department index --------------------------------------------------------------------------
   List<IconData> _getSelectedIconsForDepartment(int departmentIndex) {
     switch (departmentIndex) {
       case 0:
@@ -141,22 +145,22 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       case 1:
         return [
           Icons.home,
-          Icons.local_laundry_service_outlined,
-          Icons.recent_actors,
+          Icons.local_laundry_service,
+          Icons.domain_verification_rounded,
           Icons.person
         ];
       case 2:
         return [
           Icons.home,
           Icons.restaurant_menu_outlined,
-          Icons.recent_actors,
+          Icons.domain_verification_rounded,
           Icons.person
         ];
       default:
         return [
           Icons.home,
           Icons.work_rounded,
-          Icons.widgets_rounded,
+          Icons.domain_verification_rounded,
           Icons.person
         ];
     }

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:tuchtrip_staff_portal/utils/app_colors.dart';
 import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
-import 'package:tuchtrip_staff_portal/view%20model/login_provider.dart';
-import 'package:tuchtrip_staff_portal/view/Bottom%20Navigation%20Bar/bottom_navigation_bar.dart';
-import 'package:tuchtrip_staff_portal/view/Recent%20Activity/recent_screen.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
 
 class LaundryDashboard extends StatefulWidget {
@@ -21,9 +16,10 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     bool hasNewRequest = false;
-
+    
+    //============================================================================================
     //====================================== Room service request ================================
-
+    // Function to show room service request dialog
     void showRoomServiceRequest(BuildContext context) {
       showDialog(
         context: context,
@@ -64,14 +60,14 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                       width: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [
                             Color.fromARGB(255, 246, 101, 101),
                             Color.fromARGB(255, 253, 161, 133),
                           ],
                         ),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Decline',
                           style: TextStyle(
@@ -80,7 +76,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -94,14 +90,14 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                       width: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [
                             Color.fromARGB(255, 171, 246, 101),
                             Color.fromARGB(255, 133, 253, 147),
                           ],
                         ),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Accept',
                           style: TextStyle(
@@ -117,14 +113,16 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
         },
       );
     }
+//============================================================================================
 //====================================== Room service request ================================
+//============================================================================================
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 5, 106, 122),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(40),
@@ -154,7 +152,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                               showRoomServiceRequest(context);
                             }
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.notifications_none_rounded,
                             color: backgroundColor,
                           ),
@@ -165,7 +163,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                   Container(
                     height: height * 0.11,
                     width: width * 0.22,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: transparantColor,
                       shape: BoxShape.circle,
                       image:
@@ -203,8 +201,8 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                           //   height: height * 0.02,
                           // ),
                         ),
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(2),
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(2),
                       ),
                     ),
                   ),
@@ -255,7 +253,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                                 ),
                               ],
                             ),
-                            VerticalDivider(),
+                            const VerticalDivider(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -269,7 +267,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                                 ),
                               ],
                             ),
-                            VerticalDivider(),
+                            const VerticalDivider(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -310,10 +308,10 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                     Center(
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RecentActivity()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => RecentActivity()));
                         },
                         child: Text(
                           "See more",
@@ -328,7 +326,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                   shrinkWrap: true,
                   itemCount: 4,
                   scrollDirection: Axis.vertical,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.only(top: height * 0.02),
                     child: Row(
@@ -336,7 +334,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                       children: [
                         Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               backgroundColor:
                                   Color.fromARGB(255, 109, 191, 204),
                               child: Icon(
@@ -372,7 +370,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                                   width: width * 0.18,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      gradient: LinearGradient(colors: [
+                                      gradient: const LinearGradient(colors: [
                                         Color.fromARGB(255, 246, 101,
                                             101), // Converted from #f6d365 (starting color)
                                         Color.fromARGB(255, 253, 161, 133),
@@ -395,7 +393,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                                   width: width * 0.18,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      gradient: LinearGradient(colors: [
+                                      gradient: const LinearGradient(colors: [
                                         Color.fromARGB(255, 171, 246,
                                             101), // Converted from #f6d365 (starting color)
                                         Color.fromARGB(255, 133, 253, 147),
@@ -423,10 +421,10 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                     Center(
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RecentActivity()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => RecentActivity()));
                         },
                         child: Text(
                           "See more",
@@ -438,7 +436,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: announcements.length,
                   itemBuilder: (context, index) {
                     final announcement = announcements[index];
@@ -447,7 +445,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 offset: Offset(-0.3, 1),
                                 blurRadius: 2,
@@ -469,7 +467,7 @@ class _LaundryDashboardState extends State<LaundryDashboard> {
                               announcement.content,
                               style: smallTextStyle,
                             ),
-                            trailing: CircleAvatar(
+                            trailing: const CircleAvatar(
                               backgroundColor:
                                   Color.fromARGB(255, 100, 205, 132),
                               child: Icon(

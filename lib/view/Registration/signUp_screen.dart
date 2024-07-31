@@ -5,7 +5,6 @@ import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
 import 'package:tuchtrip_staff_portal/view/Bottom%20Navigation%20Bar/bottom_navigation_bar.dart';
 import 'package:tuchtrip_staff_portal/view/Common%20Widget/app_textButton.dart';
 import 'package:tuchtrip_staff_portal/view/Common%20Widget/app_textfield.dart';
-import 'package:tuchtrip_staff_portal/view/Dashboard/bellboys_dashboard.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
