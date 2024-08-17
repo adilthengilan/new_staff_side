@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuchtrip_staff_portal/utils/app_colors.dart';
+import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -51,17 +53,18 @@ class AppSearchBar extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.width,
-    required this.height,  prefixIcon,
+    required this.height,
+    prefixIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.065,
-      width: width * 0.90,
-      margin: EdgeInsets.only(left: width * 0.06),
+      height: height * 0.060,
+      width: width,
+      // margin: EdgeInsets.only(left: width * 0.06),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -91,7 +94,7 @@ class AppSearchBar extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
-          // hintStyle: smallTextStyle,
+          hintStyle: smallTextStyle,
           contentPadding: EdgeInsets.only(top: height * 0.013),
           prefixIcon: Padding(
             padding: EdgeInsets.only(

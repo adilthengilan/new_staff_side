@@ -10,37 +10,56 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Delay navigation to the next screen
-    Future.delayed(const Duration(seconds: 5), () {
-      final isLoggedIn =
-          Provider.of<LoginProvider>(context, listen: false).isLoggedIn;
+    // Delay navigation to the next screen by 5 seconds
+    Future.delayed(const Duration(seconds: 5), () async {
+      // Access the LoginProvider to check login status
+      final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => isLoggedIn
-              ? CustomBottomNavigationBar(departmentIndex: 0) // Update index as needed
-              :  LoginScreen(),
-        ),
-      );
+      // Load login details from SharedPreferences
+      // await loginProvider.loadLoginDetails();
+
+      // Check if the user is logged in
+      if (loginProvider.isLoggedIn) {
+        // Get the department index based on the logged-in user's department
+        final departmentIndex = getDepartmentIndex(loginProvider.department);
+        // Navigate to the CustomBottomNavigationBar with the appropriate department index
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CustomBottomNavigationBar(
+              departmentIndex: departmentIndex,
+            ),
+          ),
+        );
+      } else {
+        // Navigate to the LoginScreen if the user is not logged in
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+      }
     });
 
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor, // Set the background color of the splash screen
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Display the splash screen image
             Container(
               height: height * 0.50,
               width: width * 0.50,
               decoration: BoxDecoration(
                 image: const DecorationImage(
                   image: AssetImage(
-                      "assests/images/Screenshot 2024-07-29 113915.png"),
+                    "assests/images/Screenshot 2024-07-29 113915.png",
+                  ),
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -49,5 +68,20 @@ class Splash extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Method to get the department index based on the department name
+  int getDepartmentIndex(String? department) {
+    switch (department) {
+      case 'bellboys':
+        return 0;
+      case 'laundry':
+        return 1;
+      case 'restaurant':
+        return 2;
+      // Add other departments as needed
+      default:
+        return 0;
+    }
   }
 }

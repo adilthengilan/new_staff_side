@@ -25,6 +25,14 @@ final TextStyle mediumTextstylebold = GoogleFonts.montserrat(
   ),
 );
 
+final TextStyle mediumTextstyle = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+  ),
+);
+
 //---------------------------------- white textstyle---------------------------------------
 final TextStyle smallTextstylewhite = GoogleFonts.montserrat(
   textStyle: TextStyle(

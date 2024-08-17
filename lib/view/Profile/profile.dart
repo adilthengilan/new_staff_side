@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tuchtrip_staff_portal/utils/app_colors.dart';
 import 'package:tuchtrip_staff_portal/utils/text_styles.dart';
+import 'package:tuchtrip_staff_portal/view%20model/login_provider.dart';
 import 'package:tuchtrip_staff_portal/view/Registration/login_screen.dart';
+import 'package:tuchtrip_staff_portal/view/Registration/signUp_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -10,6 +13,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    final loginProvider = Provider.of<LoginProvider>(context);
+    final checkInTime = loginProvider.checkInTime;
+    final checkOutTime = loginProvider.checkOutTime;
 
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -20,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
             top: height * 0.12,
             bottom: height * 0.06,
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
@@ -59,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   height: height * 0.11,
                   width: width * 0.22,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: transparantColor,
                     shape: BoxShape.circle,
                     image:
@@ -97,26 +104,23 @@ class ProfileScreen extends StatelessWidget {
                         //   height: height * 0.02,
                         // ),
                       ),
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(2),
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(2),
                     ),
                   ),
                 ),
                 sizedBox(height * 0.03, 0.0),
                 //===================================================================== User Name ===========================================
-                Text("John Smith", style: mediumTextstylebold),
+                Text(loginProvider.userName!, style: mediumTextstylebold),
                 Text("(Employee id)", style: smallTextStyle),
                 sizedBox(height * 0.061, 0.0),
 
                 Container(
-                  height: height * 0.16,
                   width: width * 0.800,
-                  margin: EdgeInsets.symmetric(horizontal: width * 0.04),
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         offset: Offset(4, 4),
                         blurRadius: 4,
@@ -130,7 +134,8 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: height * 0.03),
+                    padding: EdgeInsets.only(
+                        top: height * 0.03, bottom: height * 0.03),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -146,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                               style: smallgreyTextStyle,
                             ),
                             Text(
-                              "Shift",
+                              'Checkin and\n checkout',
                               style: smallgreyTextStyle,
                             ),
                           ],
@@ -160,12 +165,13 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             // sizedBox(height * 0.01, width * 0.01),
                             Text(
-                              "Kitchen",
+                              loginProvider.department!,
                               style: smallTextStyle,
                             ),
                             // sizedBox(height * 0.01, width * 0.01),
                             Text(
-                              "9:00 am - 5:00",
+                              "10:00 am -\n 5:00 pm",
+                              // '$checkInTime - $checkOutTime',
                               style: smallTextStyle,
                             )
                           ],
@@ -184,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 offset: Offset(2, 1),
                 blurRadius: 2,
@@ -222,7 +228,7 @@ class ProfileScreen extends StatelessWidget {
                 sizedBox(height * 0.02, width * 0.01),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.phone_android_outlined,
                       color: greyShadeLight,
                       size: 18,
@@ -237,7 +243,7 @@ class ProfileScreen extends StatelessWidget {
                 sizedBox(height * 0.01, 0.0),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.mail_outline,
                       color: greyShadeLight,
                       size: 18,
@@ -267,8 +273,8 @@ class ProfileScreen extends StatelessWidget {
         itemCount: 4,
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: width * 0.06),
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 18,
             mainAxisSpacing: 20,
@@ -333,7 +339,7 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     offset: Offset(2, 1),
                     blurRadius: 2,
@@ -360,7 +366,7 @@ class ProfileScreen extends StatelessWidget {
                   sizedBox(height * 0.01, width),
                   Text(
                     //================================= Text ==============================
-                    text, textAlign: TextAlign.center,
+                    text, textAlign: TextAlign.center, style: smallTextStyle,
                     // style: darktheme ? whiteSmallTextStyle : smallTextStyle,
                   ),
                 ],
@@ -372,83 +378,88 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class FunctionalButtonsSection extends StatelessWidget {
+  const FunctionalButtonsSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          leading: Icon(Icons.schedule),
-          title: Text('View Schedule'),
+          leading: const Icon(Icons.schedule),
+          title: Text('View Schedule', style: smallTextStyle),
           onTap: () {
             // Navigate to Schedule Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.time_to_leave),
-          title: Text('Request Time Off'),
+          leading: const Icon(Icons.time_to_leave),
+          title: Text('Request Time Off', style: smallTextStyle),
           onTap: () {
             // Navigate to Time Off Request Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.feedback),
-          title: Text('Submit Feedback'),
+          leading: const Icon(Icons.feedback),
+          title: Text('Submit Feedback', style: smallTextStyle),
           onTap: () {
             // Navigate to Feedback Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.attach_money),
-          title: Text('View Pay Slips'),
+          leading: const Icon(Icons.attach_money),
+          title: Text(
+            'View Pay Slips',
+            style: smallTextStyle,
+          ),
           onTap: () {
             // Navigate to Pay Slips Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.school),
-          title: Text('Training Modules'),
+          leading: const Icon(Icons.school),
+          title: Text('Training Modules', style: smallTextStyle),
           onTap: () {
             // Navigate to Training Modules Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.assessment),
-          title: Text('Performance Reports'),
+          leading: const Icon(Icons.assessment),
+          title: Text('Performance Reports', style: smallTextStyle),
           onTap: () {
             // Navigate to Performance Reports Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.message),
-          title: Text('Communications'),
+          leading: const Icon(Icons.message),
+          title: Text('Communications', style: smallTextStyle),
           onTap: () {
             // Navigate to Communications Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.notifications),
-          title: Text('Notifications and Announcements'),
+          leading: const Icon(Icons.notifications),
+          title: Text('Notifications and Announcements', style: smallTextStyle),
           onTap: () {
             // Navigate to Notifications Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.task),
-          title: Text('Task Management'),
+          leading: const Icon(Icons.task),
+          title: Text('Task Management', style: smallTextStyle),
           onTap: () {
             // Navigate to Task Management Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.contact_phone),
-          title: Text('Emergency Contact'),
+          leading: const Icon(Icons.contact_phone),
+          title: Text('Emergency Contact', style: smallTextStyle),
           onTap: () {
             // Navigate to Emergency Contact Screen
           },
         ),
         ListTile(
-          leading: Icon(Icons.logout),
-          title: Text('Logout'),
+          leading: const Icon(Icons.logout),
+          title: Text('Logout', style: smallTextStyle),
           onTap: () {
             // Logout Logic
           },
@@ -467,15 +478,17 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }
 
 class JobDescriptionCard extends StatelessWidget {
+  const JobDescriptionCard({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(
@@ -496,16 +509,18 @@ class AssignedTasksList extends StatelessWidget {
     'Ensure lobby area is presentable',
   ];
 
+  AssignedTasksList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           return ListTile(
-            leading: Icon(Icons.task),
+            leading: const Icon(Icons.task),
             title: Text(tasks[index]),
           );
         },
@@ -515,9 +530,11 @@ class AssignedTasksList extends StatelessWidget {
 }
 
 class ScheduleCard extends StatelessWidget {
+  const ScheduleCard({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -545,16 +562,18 @@ class SpecialProjectsList extends StatelessWidget {
     'Redesigning the lobby area',
   ];
 
+  SpecialProjectsList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: projects.length,
         itemBuilder: (context, index) {
           return ListTile(
-            leading: Icon(Icons.work),
+            leading: const Icon(Icons.work),
             title: Text(projects[index]),
           );
         },
